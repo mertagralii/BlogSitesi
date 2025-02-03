@@ -20,11 +20,22 @@ namespace BlogSitesi.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Authors()
         {
             return View();
         }
 
-        
+        public IActionResult Categories() 
+        {
+            return View();
+        }
+
+        public IActionResult Editor() 
+        {
+            return View(); 
+        }
+
+
+
     }
 }
