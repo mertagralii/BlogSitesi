@@ -1,3 +1,6 @@
+using Microsoft.Data.SqlClient;
+using System.Data;
+
 namespace BlogSitesi
 {
     public class Program
@@ -8,6 +11,13 @@ namespace BlogSitesi
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddTransient<IDbConnection>(serviceProvider =>
+            {
+                var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
+                return new SqlConnection(connectionString);
+            });
 
             var app = builder.Build();
 

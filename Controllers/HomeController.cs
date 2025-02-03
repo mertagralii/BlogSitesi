@@ -1,3 +1,4 @@
+using System.Data;
 using System.Diagnostics;
 using BlogSitesi.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -6,12 +7,13 @@ namespace BlogSitesi.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IDbConnection _connection;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IDbConnection connection)
         {
-            _logger = logger;
+            _connection = connection;
         }
+
 
         public IActionResult Index()
         {
@@ -23,10 +25,6 @@ namespace BlogSitesi.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        
     }
 }
