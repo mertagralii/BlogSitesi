@@ -38,6 +38,8 @@ namespace BlogSitesi.Models
 
         public bool IsIndex { get; set; }
 
+       
+
 
     }
 }

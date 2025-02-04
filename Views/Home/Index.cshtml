@@ -1,17 +1,36 @@
-﻿@{
+﻿@model List<IndexViewModel>
+@{
     ViewData["Title"] = "Ana Sayfa";
 }
 
-<div class="accordion" id="accordionPanelsStayOpenExample">
-    <div class="accordion-item">
-        <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                Title
-            </button>
-        </h2>
-        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-            <div class="accordion-body">
-               Summary
+@foreach (var blog in Model)
+{
+    <div class="container mt-4">
+        <hr class="border border-primary border-3 opacity-75">
+        <!-- Başlık ve Özet -->
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-4 text-primary">@blog.Title</h1>
+                <p class="lead text-muted">@blog.Summary <a href="/Home/Details/@blog.Id">detayını görmek için tıkla</a></p>
+            </div>
         </div>
+
+        <!-- Yazar, Tarih, Kategori Bilgisi -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <p class="font-weight-bold"><i class="bi bi-person"></i> @blog.Name @blog.Surname</p>
+            </div>
+            <div class="col-md-4">
+                <p class="font-weight-bold"><i class="bi bi-calendar"></i> @blog.CreatedDate.ToString("f")</p>
+            </div>
+            <div class="col-md-4">
+                <p class="font-weight-bold"><i class="bi bi-tags"></i> @blog.CategoryName</p>
+            </div>
+        </div>
+
     </div>
-</div>
+    <hr class="border border-primary border-3 opacity-75">
+       
+
+}
+

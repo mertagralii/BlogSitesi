@@ -1,7 +1,10 @@
 using System.Data;
 using System.Diagnostics;
 using BlogSitesi.Models;
+using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
+using Slugify;
 
 namespace BlogSitesi.Controllers
 {
@@ -17,7 +20,28 @@ namespace BlogSitesi.Controllers
         [Route("/")]
         public IActionResult Index()
         {
-            return View();
+            var blogPosts = _connection.Query<IndexViewModel>
+                (
+                    @"SELECT b.*,c.CategoryName,a.Name,a.SurName FROM TBLBlog b
+                      LEFT JOIN TBLCategory c ON b.CategoryId = c.Id
+                      LEFT JOIN TBLAuthors a ON b.AuthorsId = a.Id
+                      WHERE b.IsIndex = 1 AND b.IsApproved = 1 AND b.IsDeleted = 0"
+                ).ToList();
+            return View(blogPosts);
+        }
+
+       
+        public IActionResult Details(int Id)
+        {
+            var blogDetails = _connection.QuerySingleOrDefault<IndexViewModel>
+                (
+                    @"SELECT b.*,c.CategoryName,a.Name,a.SurName FROM TBLBlog b
+                      LEFT JOIN TBLCategory c ON b.CategoryId = c.Id
+                      LEFT JOIN TBLAuthors a ON b.AuthorsId = a.Id
+                      WHERE b.IsIndex = 1 AND b.IsApproved = 1 AND b.IsDeleted = 0 AND b.Id=@Id", new {Id}
+                );
+
+            return View(blogDetails); 
         }
 
         [Route("/Yazarlar")]

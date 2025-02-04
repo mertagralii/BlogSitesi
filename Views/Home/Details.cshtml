@@ -1,0 +1,26 @@
+﻿@model IndexViewModel
+
+<div class="container mt-4">
+    <hr class="border border-primary border-3 opacity-75">
+    <!-- Başlık ve Özet -->
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-primary">@Model.Title</h1>
+            <p class="lead text-muted">@Model.Description</p>
+        </div>
+    </div>
+
+    <!-- Yazar, Tarih, Kategori Bilgisi -->
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <p class="font-weight-bold"><i class="bi bi-person"></i> @Model.Name @Model.Surname</p>
+        </div>
+        <div class="col-md-4">
+            <p class="font-weight-bold"><i class="bi bi-calendar"></i> @Model.CreatedDate.ToString("f")</p>
+        </div>
+        <div class="col-md-4">
+            <p class="font-weight-bold"><i class="bi bi-tags"></i> @Model.CategoryName</p>
+        </div>
+    </div>
+
+</div>
