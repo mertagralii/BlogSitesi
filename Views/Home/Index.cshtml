@@ -11,14 +11,14 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="display-4 text-primary">@blog.Title</h1>
-                <p class="lead text-muted">@blog.Summary <a href="/Home/Details/@blog.Id">detayını görmek için tıkla</a></p>
+                <p class="lead text-muted">@blog.Summary <a href="/Home/Details/@blog.BlogId">Detayını görmek için tıkla</a></p>
             </div>
         </div>
 
         <!-- Yazar, Tarih, Kategori Bilgisi -->
         <div class="row mt-4">
             <div class="col-md-4">
-                <p class="font-weight-bold"><i class="bi bi-person"></i> @blog.Name @blog.Surname</p>
+                <p class="font-weight-bold"><i class="bi bi-person"></i> <a href="/Home/AuthorDetails/@blog.AuthorId">@blog.Name @blog.Surname</a></p>
             </div>
             <div class="col-md-4">
                 <p class="font-weight-bold"><i class="bi bi-calendar"></i> @blog.CreatedDate.ToString("f")</p>
