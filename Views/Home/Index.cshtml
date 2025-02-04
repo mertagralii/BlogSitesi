@@ -2,11 +2,13 @@
 @{
     ViewData["Title"] = "Ana Sayfa";
 }
+<h1>Önce Çıkan Blog Yazıları</h1>
+<hr class="border border-dark border-3 opacity-75">
 
 @foreach (var blog in Model)
 {
     <div class="container mt-4">
-        <hr class="border border-primary border-3 opacity-75">
+        
         <!-- Başlık ve Özet -->
         <div class="row">
             <div class="col-12">
@@ -21,10 +23,10 @@
                 <p class="font-weight-bold"><i class="bi bi-person"></i> <a href="/Home/AuthorDetails/@blog.AuthorId">@blog.Name @blog.Surname</a></p>
             </div>
             <div class="col-md-4">
-                <p class="font-weight-bold"><i class="bi bi-calendar"></i> @blog.CreatedDate.ToString("f")</p>
+                <p class="font-weight-bold"><i class="bi bi-calendar"></i> @blog.CreatedDate.ToString("D")</p>
             </div>
             <div class="col-md-4">
-                <p class="font-weight-bold"><i class="bi bi-tags"></i> @blog.CategoryName</p>
+                <p class="font-weight-bold"><i class="bi bi-tags"></i>  @blog.CategoryName</p>
             </div>
         </div>
 

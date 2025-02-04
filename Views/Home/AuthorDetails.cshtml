@@ -1,4 +1,24 @@
 ﻿@model TBLAuthorsModel
 
-@Model.Name @Model.Surname @Model.Birthday
-<img src="@Model.ImageURL " alt="Alternate Text" /> 
+<div class="container mt-5">
+    <div class="row">
+        <!-- Sol Taraf - Profil -->
+        <div class="col-md-4 text-center border-end">
+            <img src="@Model.ImageURL" alt="Profil Resmi" class="profile-img mb-3" style="width:200px">
+            <h4>@Model.Name @Model.Surname</h4>
+            <p><strong>Yaş:</strong> @Model.Age</p>
+            <p><strong>Doğum Yeri:</strong> @Model.Birthplace</p>
+            <p><strong>Doğum Tarihi:</strong> @Model.Birthday.ToString("D")</p>
+            <p><strong>Hesap Oluşturulma Tarihi:</strong> @Model.CreatedDate.ToString("D")</p>
+            
+        </div>
+        <!-- Sağ Taraf - Kendini Tanıt -->
+        <div class="col-md-8">
+            <h3>Summary</h3>
+            <p>@Model.Summary</p>
+
+            <h3>Description</h3>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+</div>
