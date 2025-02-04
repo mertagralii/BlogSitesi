@@ -14,22 +14,24 @@ namespace BlogSitesi.Controllers
             _connection = connection;
         }
 
-
+        [Route("/")]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Route("/Yazarlar")]
         public IActionResult Authors()
         {
             return View();
         }
-
+        [Route("/Kategoriler")]
         public IActionResult Categories() 
         {
             return View();
         }
 
+        [Route("/Editor")]
         public IActionResult Editor() 
         {
             return View(); 
