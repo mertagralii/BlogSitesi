@@ -13,13 +13,13 @@
     <!-- Yazar, Tarih, Kategori Bilgisi -->
     <div class="row mt-4">
         <div class="col-md-4">
-            <p class="font-weight-bold"><i class="bi bi-person"></i> @Model.Name @Model.Surname</p>
+            <p class="font-weight-bold"><i class="bi bi-person"></i> <a href="/Home/AuthorDetails/@Model.AuthorId"> @Model.Name @Model.Surname</a></p>
         </div>
         <div class="col-md-4">
             <p class="font-weight-bold"><i class="bi bi-calendar"></i> @Model.CreatedDate.ToString("D")</p>
         </div>
         <div class="col-md-4">
-            <p class="font-weight-bold"><i class="bi bi-tags"></i>@Model.CategoryName</p>
+            <p class="font-weight-bold"><i class="bi bi-tags"></i> <a href="/Kategoriler">@Model.CategoryName</a></p>
         </div>
     </div>
 
