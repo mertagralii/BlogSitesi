@@ -52,9 +52,7 @@ namespace BlogSitesi.Controllers
             var blogDetails = _connection.QuerySingleOrDefault<IndexViewModel>
                 (
                     @"SELECT
-                        b.Id AS BlogId, 
-                        b.CategoryId, 
-                        b.AuthorsId,
+                        b.Id AS BlogId,  
                         b.Title, 
                         b.Summary, 
                         b.Description, 
@@ -65,12 +63,13 @@ namespace BlogSitesi.Controllers
                         b.IsIndex,
                         c.Id AS CategoryId,
                         c.CategoryName,
+                        a.Id AS AuthorId,
                         a.Name,
                         a.SurName
                         FROM TBLBlog b
                       LEFT JOIN TBLCategory c ON b.CategoryId = c.Id
                       LEFT JOIN TBLAuthors a ON b.AuthorsId = a.Id
-                      WHERE b.IsIndex = 1 AND b.IsApproved = 1 AND b.IsDeleted = 0 AND b.Id=@Id", new {Id}
+                      WHERE b.Id=@Id", new {Id}
                 );
 
             return View(blogDetails); 
