@@ -97,13 +97,24 @@ namespace BlogSitesi.Controllers
              GROUP BY a.Id, a.Name, a.SurName
              ORDER BY a.Name;"
             ).ToList();
+
             return View(authorsListAndPostCount);
         }
         [Route("/Kategoriler")]
         public IActionResult Categories() 
         {
-
-            return View();
+            var categoryListAndPostCount = _connection.Query<CategoryViewModel>
+                (
+                    @"SELECT 
+                    c.Id AS CategoryId,
+                    c.CategoryName,
+                    COUNT(b.Id) AS BlogCount
+                    FROM TBLCategory c
+                    LEFT JOIN TBLBlog b ON c.Id = b.CategoryId
+                    GROUP BY c.Id, c.CategoryName
+                    ORDER BY c.CategoryName;"
+                ).ToList();
+            return View(categoryListAndPostCount);
         }
 
         [Route("/Editor")]
