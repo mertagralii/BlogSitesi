@@ -85,11 +85,24 @@ namespace BlogSitesi.Controllers
         [Route("/Yazarlar")]
         public IActionResult Authors()
         {
-            return View();
+            var authorsListAndPostCount = _connection.Query<AuthorsViewModel>
+            (
+             @"SELECT
+              a.Id AS AuthorId,
+              a.Name,
+              a.SurName,
+              COUNT(b.Id) AS PostCount
+              FROM TBLAuthors a
+             LEFT JOIN TBLBlog b ON a.Id = b.AuthorsId 
+             GROUP BY a.Id, a.Name, a.SurName
+             ORDER BY a.Name;"
+            ).ToList();
+            return View(authorsListAndPostCount);
         }
         [Route("/Kategoriler")]
         public IActionResult Categories() 
         {
+
             return View();
         }
 
