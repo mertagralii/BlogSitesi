@@ -2,7 +2,7 @@
 {
     public class AuthorsViewModel
     {
-        public int AuthorsId { get; set; }
+        public int AuthorId { get; set; }
 
         public string Name { get; set; }
 
