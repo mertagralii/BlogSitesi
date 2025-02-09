@@ -1,1 +1,17 @@
-﻿test
+﻿
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<h1>Category Ekle</h1>
+<hr class="border border-dark border-3 opacity-75">
+
+<form action="/Home/AddCategory" method="post">
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="CategoryName" placeholder="Category Adı girin" name="CategoryName">
+        <label for="title">CategoryName</label>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Kaydet</button>
+</form>
+
+<hr class="border border-dark border-3 opacity-75">

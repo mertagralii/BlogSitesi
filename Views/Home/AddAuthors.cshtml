@@ -1,1 +1,54 @@
-﻿<p>test</p>
+﻿@{
+    ViewData["Title"] = "Add Authors";
+}
+
+<h1>Authors Ekle</h1>
+<hr class="border border-dark border-3 opacity-75">
+
+<form action="/Home/AddAuthors" method="post">
+
+     <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="Name" placeholder="Name girin" name="Name">
+        <label for="title">Name</label>
+    </div>
+
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="SurName" placeholder="SurName girin" name="SurName">
+        <label for="title">SurName</label>
+    </div>
+
+    <div class="form-floating mb-3 mt-3">
+        <input type="number" class="form-control" id="Age" placeholder="Age girin" name="Age">
+        <label for="title">Age</label>
+    </div>
+
+    <div class="form-floating mb-3 mt-3">
+        <input type="datetime" class="form-control" id="Birthday" placeholder="Birthday girin" name="Birthday">
+        <label for="title">Birthday</label>
+    </div>
+
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="Birthplace" placeholder="Birthplace girin" name="Birthplace">
+        <label for="title">Birthplace</label>
+    </div>
+
+    <div class="form-floating mb-3 mt-3">
+        <input type="url" class="form-control" id="ImageURL" placeholder="ImageURL girin" name="ImageURL">
+        <label for="title">ImageURL</label>
+    </div>
+
+
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="Description" placeholder="Description girin" name="Description">
+        <label for="title">Description</label>
+    </div>
+
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="Summary" placeholder="Summary girin" name="Summary">
+        <label for="title">Summary</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Kaydet</button>
+</form>
+
+<hr class="border border-dark border-3 opacity-75">

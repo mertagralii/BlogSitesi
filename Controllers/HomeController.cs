@@ -165,7 +165,14 @@ namespace BlogSitesi.Controllers
         [HttpPost]
         public IActionResult AddCategory(TBLCategoryModel category) 
         {
-            return View(); 
+            var addCategory = _connection.Execute(
+                @"INSERT INTO TBLCategory
+                  (CategoryName) VALUES (@CategoryName)", new
+                {
+                    @CategoryName = category.CategoryName,
+                }
+            );
+            return RedirectToAction("Categories");
         }
 
         [HttpGet]
@@ -178,7 +185,25 @@ namespace BlogSitesi.Controllers
         [HttpPost]
         public IActionResult AddAuthors(TBLAuthorsModel authors) 
         {
-            return View(); 
+            var date = DateTime.Now;
+            var addAuthor = _connection.Execute(
+                                                @"INSERT INTO TBLAuthors
+                                                  (Name,SurName,Age,Birthday,Birthplace,ImageURL,CreatedDate,Description,Summary)
+                                                  VALUES (@Name,@SurName,@Age,@Birthday,@Birthplace,@ImageURL,@CreatedDate,@Description,@Summary)", new
+                                                {
+                                                    Name = authors.Name,
+                                                    SurName = authors.SurName,
+                                                    Age = authors.Age,
+                                                    Birthday = authors.Birthday,
+                                                    Birthplace = authors.Birthplace,
+                                                    ImageURL = authors.ImageURL,
+                                                    CreatedDate = date,
+                                                    Description = authors.Description,
+                                                    Summary = authors.Summary,
+
+                                                }
+                                               );
+            return RedirectToAction("Authors");
         }
 
 
