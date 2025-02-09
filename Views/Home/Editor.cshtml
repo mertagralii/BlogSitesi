@@ -1,4 +1,51 @@
-﻿
+﻿@model EditorViewModel
 @{
-	ViewData["Title"] = "Editör";
+    ViewData["Title"] = "Editör";
 }
+
+<h1>Yazı Ekle</h1>
+<hr class="border border-dark border-3 opacity-75">
+
+<form action="/Home/AddPost" method="post">
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="Title" placeholder="Başlık girin" name="title">
+        <label for="title">Başlık</label>
+    </div>
+
+    <div class="form-floating mt-3 mb-3">
+        <input type="text" class="form-control" id="Summary" placeholder="Özet girin" name="Summary">
+        <label for="Summary">Özet</label>
+    </div>
+
+    <label for="Contents">Contents</label>
+    <textarea class="form-control" rows="5" id="Contents" name="Description" placeholder="İçeriği buraya yazınız"></textarea>
+
+    <label for="Category">Category Seçin</label>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <select class="form-select mt-3" style="width:300px;" name="CategoryId">
+            @foreach (var category in Model.Category)
+            {
+                <option value="@category.Id">@category.CategoryName</option>
+            }
+        </select>
+        <a href="/Home/AddCategory" style="margin-top: 8px;">Yeni Kategori Ekle</a>
+    </div>
+
+    <label for="Author">Author Seçin</label>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <select class="form-select mt-3" style="width:300px;" name="AuthorsId">
+            @foreach (var author in Model.Authors)
+            {
+                <option value="@author.Id">@author.Name</option>
+            }
+        </select>
+        <a href="/Home/AddAuthors" style="margin-top: 8px;">Yeni Yazar Ekle</a>
+    </div>
+    <input type="hidden" name="IsApproved" value="True" />
+    <input type="hidden" name="IsIndex" value="True" />
+    <input type="hidden" name="IsDelete" value="False" />
+
+    <button type="submit" class="btn btn-primary mt-2">Kaydet</button>
+</form>
+
+<hr class="border border-dark border-3 opacity-75">
