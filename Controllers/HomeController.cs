@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using System.Diagnostics;
 using BlogSitesi.Models;
@@ -119,6 +120,63 @@ namespace BlogSitesi.Controllers
 
         [Route("/Editor")]
         public IActionResult Editor() 
+        {
+            var categoryList = _connection.Query<TBLCategoryModel>("SELECT * FROM TBLCategory").ToList();
+            var authorsList = _connection.Query<TBLAuthorsModel>("SELECT * FROM TBLAuthors").ToList();
+            var model = new EditorViewModel()
+            {
+                Authors = authorsList,
+                Category = categoryList
+            };
+            return View(model); 
+        }
+
+        [HttpPost]
+        public IActionResult AddPost(TBLBlogModel post)
+        {
+            var date = DateTime.Now;
+            var addPost = _connection.Execute
+                (
+                 @"INSERT INTO TBLBlog
+                   (Title, Summary, Description, CreatedDate, AuthorsId, CategoryId, IsDeleted, IsApproved, IsIndex) 
+                   VALUES (@Title, @Summary,@Description,@CreatedDate,@AuthorsId,@CategoryId,@IsDeleted,@IsApproved,@IsIndex);
+                  "
+                , new
+                {
+                    Title = post.Title,
+                    Summary = post.Summary,
+                    Description = post.Description,
+                    CreatedDate = date,
+                    AuthorsId = post.AuthorsId,
+                    CategoryId = post.CategoryId,
+                    IsDeleted = post.IsDeleted,
+                    IsApproved = post.IsApproved,
+                    IsIndex = post.IsIndex,
+                });
+            return RedirectToAction("Index"); 
+        }
+
+        [HttpGet]
+        public IActionResult AddCategory()
+        {
+            return View(); 
+        }
+
+        [HttpPost]
+        public IActionResult AddCategory(TBLCategoryModel category) 
+        {
+            return View(); 
+        }
+
+        [HttpGet]
+
+        public IActionResult AddAuthors() 
+        {
+            return View(); 
+        }
+
+        [HttpPost]
+        public IActionResult AddAuthors(TBLAuthorsModel authors) 
         {
             return View(); 
         }
