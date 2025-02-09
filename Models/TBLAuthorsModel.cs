@@ -16,7 +16,7 @@ namespace BlogSitesi.Models
 
         [Required(ErrorMessage ="Yazar Soy Adı Boş Bırakılamaz.")]
         [StringLength(50,ErrorMessage ="Yazar soyismi 50 karakteden uzun olamaz.")]
-        public string Surname { get; set; }
+        public string SurName { get; set; }
 
         [Required(ErrorMessage ="Yazar yaşı boş bırakılamaz.")]
         [Range(18,120,ErrorMessage ="Yazar yaşı 18'den küçük ve 120'den büyük olamaz.")]
