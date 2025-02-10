@@ -36,6 +36,8 @@ namespace BlogSitesi.Models
         [Required]
         public DateTime CreatedDate { get; set; }
 
+        public DateTime UpdateDate { get; set; }
+
         [Required(ErrorMessage ="Yazarın Kendini Tanıtma Kısmı Boş bırakılamaz.")]
         [StringLength(400,ErrorMessage ="Kendinizi tanıtacağınız kısım 400 karakterden fazla olamaz.")]
         public string Description { get; set; }

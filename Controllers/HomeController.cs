@@ -19,7 +19,7 @@ namespace BlogSitesi.Controllers
         }
 
         [Route("/")]
-        public IActionResult Index()
+        public IActionResult Index() // Ana Sayfa Kýsmý
         {
             var blogPosts = _connection.Query<IndexViewModel>
                 (
@@ -47,7 +47,7 @@ namespace BlogSitesi.Controllers
         }
 
        
-        public IActionResult Details(int Id)
+        public IActionResult Details(int Id) // Blog Detay Kýsmý
         {
    
             var blogDetails = _connection.QuerySingleOrDefault<IndexViewModel>
@@ -76,7 +76,7 @@ namespace BlogSitesi.Controllers
             return View(blogDetails); 
         }
 
-        public IActionResult AuthorDetails(int Id) 
+        public IActionResult AuthorDetails(int Id)  // Yazar Detay Kýsmý
         {
             var authorDetail = _connection.QuerySingleOrDefault<TBLAuthorsModel>("SELECT * FROM TBLAuthors WHERE Id = @Id", new {Id});
 
@@ -84,7 +84,7 @@ namespace BlogSitesi.Controllers
         }
 
         [Route("/Yazarlar")]
-        public IActionResult Authors()
+        public IActionResult Authors() // Yazarlar Kýsmý
         {
             var authorsListAndPostCount = _connection.Query<AuthorsViewModel>
             (
@@ -102,7 +102,7 @@ namespace BlogSitesi.Controllers
             return View(authorsListAndPostCount);
         }
         [Route("/Kategoriler")]
-        public IActionResult Categories() 
+        public IActionResult Categories()  // Kategoriler Kýsmý
         {
             var categoryListAndPostCount = _connection.Query<CategoryViewModel>
                 (
@@ -119,7 +119,7 @@ namespace BlogSitesi.Controllers
         }
 
         [Route("/Editor")]
-        public IActionResult Editor() 
+        public IActionResult Editor()  // Blog Yazma Kýsmý
         {
             var categoryList = _connection.Query<TBLCategoryModel>("SELECT * FROM TBLCategory").ToList();
             var authorsList = _connection.Query<TBLAuthorsModel>("SELECT * FROM TBLAuthors").ToList();
@@ -132,7 +132,7 @@ namespace BlogSitesi.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPost(TBLBlogModel post)
+        public IActionResult AddPost(TBLBlogModel post) //[POST] Blog Yazma Kýsmý
         {
             var date = DateTime.Now;
             var addPost = _connection.Execute
@@ -157,13 +157,13 @@ namespace BlogSitesi.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddCategory()
+        public IActionResult AddCategory() //  Kategori Ekleme Kýsmý
         {
             return View(); 
         }
 
         [HttpPost]
-        public IActionResult AddCategory(TBLCategoryModel category) 
+        public IActionResult AddCategory(TBLCategoryModel category)  // [POST] Kategori Ekleme Kýsmý
         {
             var addCategory = _connection.Execute(
                 @"INSERT INTO TBLCategory
@@ -177,13 +177,13 @@ namespace BlogSitesi.Controllers
 
         [HttpGet]
 
-        public IActionResult AddAuthors() 
+        public IActionResult AddAuthors() // Yazar Ekleme Kýsmý
         {
             return View(); 
         }
 
         [HttpPost]
-        public IActionResult AddAuthors(TBLAuthorsModel authors) 
+        public IActionResult AddAuthors(TBLAuthorsModel authors) // [POST] Yazar Ekleme Kýsmý
         {
             var date = DateTime.Now;
             var addAuthor = _connection.Execute(
@@ -207,7 +207,7 @@ namespace BlogSitesi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Approval() 
+        public IActionResult Approval() // Onaylama Kýsmý
         {
             var approvalList = _connection.Query<IndexViewModel>
                 (
@@ -237,7 +237,7 @@ namespace BlogSitesi.Controllers
             return View(approvalList);
         }
         
-        public IActionResult ApprovalTrue(int Id) 
+        public IActionResult ApprovalTrue(int Id) // Blog Yazýsýna Onay verme
         {
             var approvalTrue = _connection.Execute
                                                   (
@@ -249,7 +249,7 @@ namespace BlogSitesi.Controllers
             return RedirectToAction("Approval");
         }
         
-        public IActionResult IsIndexTrue(int Id) 
+        public IActionResult IsIndexTrue(int Id) // Blog Yazýsýný Öne Çýkarma
         {
             var isIndexTrue = _connection.Execute
                                                   (
@@ -261,7 +261,7 @@ namespace BlogSitesi.Controllers
             return RedirectToAction("Approval");
         }
 
-        public IActionResult BlogDelete(int Id) 
+        public IActionResult BlogDelete(int Id)  // Blog Yazýsýný Silme
         {
             var blogDelete = _connection.Execute
                                                 (
@@ -273,6 +273,44 @@ namespace BlogSitesi.Controllers
             return RedirectToAction("Approval"); 
         }
 
+        [HttpGet]
+        public IActionResult AuthorsUpdate(int Id) 
+        {
+            var updateAuthorsCheck = _connection.QuerySingleOrDefault<TBLAuthorsModel>("SELECT * FROM TBLAuthors WHERE Id = @Id", new {Id});
+             return View(updateAuthorsCheck);
+        }
+        [HttpPost]
+        public IActionResult AuthorsUpdate(TBLAuthorsModel author)
+        {
+            var UpdateDate = DateTime.Now;
+            var updateAuthors = _connection.Execute(
+                                                    @"UPDATE TBLAuthors
+                                                     SET
+                                                      Name = @Name,
+                                                      SurName = @SurName,
+                                                      Age = @Age,
+                                                      Birthday = @Birthday,
+                                                      Birthplace = @Birthplace,
+                                                      ImageURL = @ImageURL,
+                                                      Description = @Description,
+                                                      Summary = @Summary,
+                                                      UpdateDate = @UpdateDate
+                                                      WHERE Id = @Id
+                                                    ", new {
+                                                        Name = author.Name,
+                                                        SurName = author.SurName,
+                                                        Age = author.Age,
+                                                        Birthday = author.Birthday,
+                                                        Birthplace = author.Birthplace,
+                                                        ImageURL = author.ImageURL,
+                                                        Description = author.Description,
+                                                        Summary = author.Summary,
+                                                        UpdateDate = UpdateDate,
+                                                        Id = author.Id
+                                                    }
+                                                   );
+            return RedirectToAction("Authors");
+        }
 
 
     }

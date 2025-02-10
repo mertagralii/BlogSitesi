@@ -10,6 +10,7 @@
             <p><strong>Doğum Yeri:</strong> @Model.Birthplace</p>
             <p><strong>Doğum Tarihi:</strong> @Model.Birthday.ToString("D")</p>
             <p><strong>Hesap Oluşturulma Tarihi:</strong> @Model.CreatedDate.ToString("D")</p>
+            <a href="/Home/AuthorsUpdate/@Model.Id" class="btn  btn-primary">Hesabı Düzenle</a> <!--HESAP UPDATE İŞLEMİ-->
             
         </div>
         <!-- Sağ Taraf - Kendini Tanıt -->
