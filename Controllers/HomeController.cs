@@ -206,6 +206,73 @@ namespace BlogSitesi.Controllers
             return RedirectToAction("Authors");
         }
 
+        [HttpGet]
+        public IActionResult Approval() 
+        {
+            var approvalList = _connection.Query<IndexViewModel>
+                (
+                  @"SELECT
+                        b.Id AS BlogId,  
+                        b.Title, 
+                        b.Summary, 
+                        b.Description, 
+                        b.CreatedDate, 
+                        b.UpdateDate, 
+                        b.IsDeleted, 
+                        b.IsApproved, 
+                        b.IsIndex,
+                        c.Id AS CategoryId,
+                        c.CategoryName,
+                        a.Id AS AuthorId,
+                        a.Name,
+                        a.SurName
+                        FROM TBLBlog b
+                      LEFT JOIN TBLCategory c ON b.CategoryId = c.Id
+                      LEFT JOIN TBLAuthors a ON b.AuthorsId = a.Id
+                      WHERE (b.IsApproved = 0 OR b.IsIndex = 0) AND b.IsDeleted = 0 "
+                ).ToList();
+           
+
+           
+            return View(approvalList);
+        }
+        
+        public IActionResult ApprovalTrue(int Id) 
+        {
+            var approvalTrue = _connection.Execute
+                                                  (
+                                                    @"UPDATE TBLBlog
+                                                     SET
+                                                     IsApproved = 1
+                                                     Where Id = @Id", new {Id}
+                                                  );
+            return RedirectToAction("Approval");
+        }
+        
+        public IActionResult IsIndexTrue(int Id) 
+        {
+            var isIndexTrue = _connection.Execute
+                                                  (
+                                                    @"UPDATE TBLBlog
+                                                     SET
+                                                     IsIndex = 1
+                                                     Where Id = @Id", new { Id }
+                                                  );
+            return RedirectToAction("Approval");
+        }
+
+        public IActionResult BlogDelete(int Id) 
+        {
+            var blogDelete = _connection.Execute
+                                                (
+                                                  @"UPDATE TBLBlog
+                                                    SET
+                                                    IsDeleted = 1
+                                                    WHERE Id = @Id",new {Id}
+                                                );
+            return RedirectToAction("Approval"); 
+        }
+
 
 
     }

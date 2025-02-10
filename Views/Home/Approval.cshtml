@@ -1,0 +1,93 @@
+﻿@model List<IndexViewModel>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">CategoryName</th>
+            <th scope="col">AuthorsName</th>
+            <th scope="col">Title</th>
+            <th scope="col">Summary</th>
+            <th scope="col">Description</th>
+            <th scope="col">CreatedDate</th>
+            <th scope="col">UpdateDate</th>
+            <th scope="col">IsDeleted</th>
+            <th scope="col">IsApproved</th>
+            <th scope="col">IsIndex</th>
+            <th scope="col">İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var blog in Model)
+        {
+            <tr>
+                <th>@blog.BlogId</th>
+                <td>@blog.CategoryName</td>
+                <td>@blog.Name @blog.Surname</td>
+                <td>@blog.Title</td>
+                <td>@blog.Summary</td>
+                <td>@blog.Description</td>
+                <td>@blog.CreatedDate.ToString("f")</td>
+
+                @if (blog.UpdateDate == null)
+                {
+                    <td>N/a</td>
+                }else
+                {
+                    <td>@blog.UpdateDate.ToString("f")</td>
+                }
+                 @if(blog.IsDeleted == false)
+                 {
+                     <td>Silinmemiş</td>
+                 }else
+                 {
+                     <td>Silinmiş</td>
+                 }
+                  @if(blog.IsApproved == false)
+                  {
+                      <td>Onaylanmamış</td>
+                  } else
+                  {
+                      <td>Onaylamış</td>
+                  }
+                  @if(blog.IsIndex == false)
+                  {
+                     <td>Ana Sayfada Yok.</td>
+                  }
+                  else{
+                      <td>Ana Sayfada Var.</td>
+                  }
+                <td>
+                    @if(blog.IsApproved == true && blog.IsIndex == false )
+                    {
+                        <div class="text-nowrap">
+                            <a href="/Home/IsIndexTrue/@blog.BlogId" class="btn btn-info"> Yazıyı Ana Sayfada Göster</a>
+                            <a href="/Home/ApprovalTrue/@blog.BlogId" class="btn btn-danger">Sil</a>
+                        </div>
+                    }else if(blog.IsApproved == true && blog.IsIndex == true)
+                    {
+                        <div class="text-nowrap">
+
+                            <a href="/Home/ApprovalTrue/@blog.BlogId" class="btn btn-danger">Sil</a>
+                        </div>
+                    }else if(blog.IsApproved == false && blog.IsIndex == false)
+                    {
+                        <div class="text-nowrap">
+                            <a href="/Home/ApprovalTrue/@blog.BlogId" class="btn btn-success">Onayla</a>
+                            <a href="/Home/IsIndexTrue/@blog.BlogId" class="btn btn-info"> Yazıyı Ana Sayfada Göster</a>
+                            <a href="/Home/BlogDelete/@blog.BlogId" class="btn btn-danger">Sil</a>
+                        </div>
+                    }else if(blog.IsApproved == false && blog.IsIndex == true)
+                    {
+                        <div class="text-nowrap">
+                            <a href="/Home/ApprovalTrue/@blog.BlogId" class="btn btn-success">Onayla</a>
+                            <a href="/Home/BlogDelete/@blog.BlogId" class="btn btn-danger">Sil</a>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+       
+        
+
+    </tbody>
+</table>
