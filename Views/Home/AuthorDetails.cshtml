@@ -1,28 +1,54 @@
-﻿@model TBLAuthorsModel
+﻿@model AuthorsDetailsViewModel
 
 <div class="container mt-5">
     <div class="row">
         <!-- Sol Taraf - Profil -->
         <div class="col-md-4 text-center border-end">
-            <img src="@Model.ImageURL" alt="Profil Resmi" class="profile-img mb-3" style="width:200px">
-            <h4>@Model.Name @Model.SurName</h4>
-            <p><strong>Yaş:</strong> @Model.Age</p>
-            <p><strong>Doğum Yeri:</strong> @Model.Birthplace</p>
-            <p><strong>Doğum Tarihi:</strong> @Model.Birthday.ToString("D")</p>
-            <p><strong>Hesap Oluşturulma Tarihi:</strong> @Model.CreatedDate.ToString("D")</p>
-            <a href="/Home/AuthorsUpdate/@Model.Id" class="btn  btn-primary">Hesabı Düzenle</a> <!--HESAP UPDATE İŞLEMİ-->
+            <img src="@Model.Authors.ImageURL" alt="Profil Resmi" class="profile-img mb-3" style="width:200px">
+            <h4>@Model.Authors.Name @Model.Authors.SurName</h4>
+            <p><strong>Yaş:</strong> @Model.Authors.Age</p>
+            <p><strong>Doğum Yeri:</strong> @Model.Authors.Birthplace</p>
+            <p><strong>Doğum Tarihi:</strong> @Model.Authors.Birthday.ToString("D")</p>
+            <p><strong>Hesap Oluşturulma Tarihi:</strong> @Model.Authors.CreatedDate.ToString("D")</p>
+            <a href="/Home/AuthorsUpdate/@Model.Authors.Id" class="btn  btn-primary">Hesabı Düzenle</a> <!--HESAP UPDATE İŞLEMİ-->
             
         </div>
         <!-- Sağ Taraf - Kendini Tanıt -->
         <div class="col-md-8">
             <h3>Summary</h3>
-            <p>@Model.Summary</p>
-
+            <p>@Model.Authors.Summary</p>
+            <hr class="border border-dark border-3 opacity-75">
             <h3>Description</h3>
-            <p>@Model.Description</p>
-
+            <p>@Model.Authors.Description</p>
+            <hr class="border border-dark border-3 opacity-75">
             <h3>Blog Yazıları</h3>
-            <!--Buraya yazarın yazdığı blog yazıları sıralanacak.-->
+            @foreach (var authorPost in Model.Post)
+            {
+                <div class="container mt-4">
+
+                    <!-- Başlık ve Özet -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="display-4 text-primary">@authorPost.Title</h1>
+                            <p class="lead text-muted">@authorPost.Summary <a href="/Home/Details/@authorPost.BlogId">Detayını görmek için tıkla</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Yazar, Tarih, Kategori Bilgisi -->
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <p class="font-weight-bold"><i class="bi bi-person"></i> <a href="/Home/AuthorDetails/@authorPost.AuthorId">@authorPost.Name @authorPost.Surname</a></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="font-weight-bold"><i class="bi bi-calendar"></i> @authorPost.CreatedDate.ToString("D")</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="font-weight-bold"><i class="bi bi-tags"></i> <a href="/Kategoriler">@authorPost.CategoryName</a></p>
+                        </div>
+                    </div>
+
+                </div>
+            }
         </div>
     </div>
 </div>
