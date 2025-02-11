@@ -78,9 +78,37 @@ namespace BlogSitesi.Controllers
 
         public IActionResult AuthorDetails(int Id)  // Yazar Detay Kýsmý
         {
-            var authorDetail = _connection.QuerySingleOrDefault<TBLAuthorsModel>("SELECT * FROM TBLAuthors WHERE Id = @Id", new {Id});
+            var authorDetail = _connection.QuerySingleOrDefault<TBLAuthorsModel>("SELECT * FROM TBLAuthors WHERE Id = @Id", new { Id });
+            var authorsPost = _connection.Query<IndexViewModel>
+                (
+                   @"SELECT
+                        b.Id AS BlogId,  
+                        b.Title, 
+                        b.Summary, 
+                        b.Description, 
+                        b.CreatedDate, 
+                        b.UpdateDate, 
+                        b.IsDeleted, 
+                        b.IsApproved, 
+                        b.IsIndex,
+                        c.Id AS CategoryId,
+                        c.CategoryName,
+                        a.Id AS AuthorId,
+                        a.Name,
+                        a.SurName
+                        FROM TBLBlog b
+                      LEFT JOIN TBLCategory c ON b.CategoryId = c.Id
+                      LEFT JOIN TBLAuthors a ON b.AuthorsId = a.Id
+                      WHERE b.IsIndex = 1 AND b.IsApproved = 1 AND b.IsDeleted = 0 AND b.AuthorsId = @Id", new {Id}
+                ).ToList();
 
-            return View(authorDetail);
+            var model = new AuthorsDetailsViewModel()
+            {
+                Authors = authorDetail,
+                Post = authorsPost,
+            };
+
+            return View(model);
         }
 
         [Route("/Yazarlar")]
