@@ -1,4 +1,4 @@
-# Sale Management System
+# Blog Sitesi
 
 BlogSitesi, Acunmedya Akademi 11. Dönem Genişletilmiş Yazılım Uzmanlığı Eğitimi kapsamında temelden uzmanlığa geçiş sürecinde geliştirdiğim blog uygulamasıdır.
 
