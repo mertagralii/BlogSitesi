@@ -1,12 +1,18 @@
 # Sale Management System
 
-BlogSitesi, Acunmedya Akademi 11. Dönem Genişletilmiş Yazılım Uzmanlığı Eğitimi kapsamında temelden uzmanlığa geçiş sürecinde geliştirdiğim blog uygulamasıdır. Bu projede, kullanıcılar blog gönderilerini görüntüleyebilir, kategorilere göre filtreleme yapabilir ve yazarlar hakkında bilgi alabilirler. Ayrıca içerikler yönetilebilir, onaylanabilir ve silinebilir. Kullanıcılar yeni kategoriler, yeni yazılar ve yeni yazarlar ekleyebilir, kendi blog yazılarını yazabilirler
+BlogSitesi, Acunmedya Akademi 11. Dönem Genişletilmiş Yazılım Uzmanlığı Eğitimi kapsamında temelden uzmanlığa geçiş sürecinde geliştirdiğim blog uygulamasıdır.
+
+ Bu projede, kullanıcılar blog gönderilerini görüntüleyebilir, kategorilere göre filtreleme yapabilir ve yazarlar hakkında bilgi alabilirler. Ayrıca içerikler yönetilebilir, onaylanabilir ve silinebilir. Kullanıcılar yeni kategoriler, yeni yazılar ve yeni yazarlar ekleyebilir, kendi blog yazılarını yazabilirler
 
 ## 🚀 Özellikler
 📜 Blog Yazıları: Blog yazılarının oluşturulması, güncellenmesi ve silinmesi işlemleri.
+
 📋 Kategori Yönetimi: Kategoriler oluşturulabilir ve her blog yazısı bir kategoriye atanabilir.
+
 ✍️ Yazarlar: Blog yazıları yazarlarla ilişkilendirilebilir.
+
 ✅ Onay ve Silme: Admin kullanıcıları yazıları onaylayabilir ve silebilir.
+
 🔗 Slugify: Başlıklardan SEO dostu URL slug'ları oluşturmak için Slugify.Core kullanıldı.
 
 ## 🛠 Kullanılan Teknolojiler
