@@ -1,8 +1,8 @@
-﻿
+﻿@model TBLCategoryModel
 @{
     ViewData["Title"] = "Add Category";
 }
-
+<div asp-validation-summary="All" class="text-danger"></div>
 <h1>Category Ekle</h1>
 <hr class="border border-dark border-3 opacity-75">
 
@@ -10,6 +10,7 @@
     <div class="form-floating mb-3 mt-3">
         <input type="text" class="form-control" id="CategoryName" placeholder="Category Adı girin" name="CategoryName">
         <label for="title">CategoryName</label>
+        <span asp-validation-for="CategoryName" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary mt-2">Kaydet</button>
 </form>

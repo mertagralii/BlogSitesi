@@ -6,6 +6,8 @@
 
         public List<TBLAuthorsModel> Authors { get; set; }
 
-     
+        public TBLBlogModel Blog { get; set; }
+
+
     }
 }

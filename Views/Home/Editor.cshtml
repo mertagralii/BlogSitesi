@@ -4,21 +4,25 @@
 }
 
 <h1>Yazı Ekle</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
 <hr class="border border-dark border-3 opacity-75">
 
 <form action="/Home/AddPost" method="post">
     <div class="form-floating mb-3 mt-3">
         <input type="text" class="form-control" id="Title" placeholder="Başlık girin" name="title">
         <label for="title">Başlık</label>
+        <span asp-validation-for="Blog.Title" class="text-danger"></span>
     </div>
 
     <div class="form-floating mt-3 mb-3">
         <input type="text" class="form-control" id="Summary" placeholder="Özet girin" name="Summary">
         <label for="Summary">Özet</label>
+        <span asp-validation-for="Blog.Summary" cite="text-danger"></span>
     </div>
 
     <label for="Contents">Contents</label>
     <textarea class="form-control" rows="5" id="Contents" name="Description" placeholder="İçeriği buraya yazınız"></textarea>
+    <span asp-validation-for="Blog.Description" cite="text-danger"></span>
 
     <label for="Category">Category Seçin</label>
     <div style="display: flex; align-items: center; gap: 10px;">
